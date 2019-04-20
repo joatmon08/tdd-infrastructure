@@ -1,0 +1,46 @@
+{
+    "Version": "2012-10-17",
+    "Id": "MyBucketPolicy",
+    "Statement": [
+        {
+            "Sid": "AllowWriteUser",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::REDACTED:user/MyBucketWriteUser"
+            },
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::MyBucket/*"
+            ]
+        },
+        {
+            "Sid": "AllowReadUser",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::REDACTED:user/MyBucketReadUser"
+            },
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::MyBucket/*"
+            ]
+        },
+        {
+            "Sid": "AllowAdminRole",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::REDACTED:role/MyBucketRole"
+            },
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::MyBucket",
+                "arn:aws:s3:::MyBucket/*"
+            ]
+        }
+    ]
+}
