@@ -1,1 +1,1 @@
-mybucket/*.tfvars
+.terraform/

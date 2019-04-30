@@ -1,14 +1,32 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
 	"testing"
 
+	"github.com/joatmon08/tdd-infrastructure/mybucket/aws"
 	"github.com/stretchr/testify/assert"
 )
 
 const BucketPolicyFilePath = "../../policies/bucket.json"
 const AccountID = "REDACTED"
+
+func setup(t *testing.T, policyPath string) *aws.Policy {
+	jsonFile, err := os.Open(policyPath)
+	if err != nil {
+		t.Error(err)
+	}
+	defer jsonFile.Close()
+
+	policyByteValue, _ := ioutil.ReadAll(jsonFile)
+
+	var policy aws.Policy
+	json.Unmarshal(policyByteValue, &policy)
+	return &policy
+}
 
 func TestPolicyHasVersionAndID(t *testing.T) {
 	policy := setup(t, BucketPolicyFilePath)

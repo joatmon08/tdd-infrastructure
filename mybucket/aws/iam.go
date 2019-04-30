@@ -1,11 +1,4 @@
-package test
-
-import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
-	"testing"
-)
+package aws
 
 type Principal struct {
 	AWS string `json:"AWS"`
@@ -23,18 +16,4 @@ type Policy struct {
 	Version   string      `json:"Version"`
 	ID        string      `json:"Id"`
 	Statement []Statement `json:"Statement"`
-}
-
-func setup(t *testing.T, policyPath string) *Policy {
-	jsonFile, err := os.Open(policyPath)
-	if err != nil {
-		t.Error(err)
-	}
-	defer jsonFile.Close()
-
-	policyByteValue, _ := ioutil.ReadAll(jsonFile)
-
-	var policy Policy
-	json.Unmarshal(policyByteValue, &policy)
-	return &policy
 }
