@@ -62,7 +62,7 @@ func TestPolicyHasMyBucketAdminRoleStatement(t *testing.T) {
 	policy := setup(t, BucketPolicyFilePath)
 	assert.Equal(t, "AllowAdminRole", policy.Statement[2].Sid)
 	assert.Equal(t, "Allow", policy.Statement[2].Effect)
-	assert.Contains(t, policy.Statement[2].Principal.AWS, fmt.Sprintf("arn:aws:iam::%s:role/MyBucketRole", AccountID))
+	assert.Contains(t, policy.Statement[2].Principal.AWS, fmt.Sprintf("arn:aws:iam::%s:role/MyBucketAdminRole", AccountID))
 	assert.Equal(t, 1, len(policy.Statement[2].Action))
 	assert.Contains(t, policy.Statement[2].Action, "s3:*")
 	assert.Contains(t, policy.Statement[2].Resource, "arn:aws:s3:::MyBucket")

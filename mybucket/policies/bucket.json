@@ -32,7 +32,7 @@
             "Sid": "AllowAdminRole",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::REDACTED:role/MyBucketRole"
+                "AWS": "arn:aws:iam::REDACTED:role/MyBucketAdminRole"
             },
             "Action": [
                 "s3:*"
