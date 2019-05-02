@@ -6,3 +6,8 @@ variable "aws_region" {
 variable "bucket_name" {
   type = "string"
 }
+
+variable "pgp_key" {
+  type = "string"
+  default = "test"
+}
