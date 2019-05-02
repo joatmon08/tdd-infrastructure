@@ -1,6 +1,10 @@
 include local.env
 export $(shell sed 's/=.*//' local.env)
 
+install:
+	bundle install
+	dep ensure
+
 unit:
 	go test ./tests/unit/...
 
