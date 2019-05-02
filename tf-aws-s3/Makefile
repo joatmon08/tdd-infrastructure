@@ -4,6 +4,7 @@ export $(shell sed 's/=.*//' local.env)
 install:
 	bundle install
 	dep ensure
+	terraform init
 
 unit:
 	go test ./tests/unit/...
