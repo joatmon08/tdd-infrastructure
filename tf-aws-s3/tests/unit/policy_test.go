@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/joatmon08/tdd-infrastructure/mybucket/aws"
+	"github.com/joatmon08/tdd-infrastructure/tf-aws-s3/aws"
 	"github.com/stretchr/testify/assert"
 )
 

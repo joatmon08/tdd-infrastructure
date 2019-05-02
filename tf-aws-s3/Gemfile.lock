@@ -754,8 +754,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awspec (~> 1.17.3)
-  rake
+  awspec (~> 1.17.3)!
+  rake!
 
 RUBY VERSION
    ruby 2.6.3p62
