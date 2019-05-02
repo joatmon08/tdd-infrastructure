@@ -1,0 +1,6 @@
+ruby '2.6.3'
+
+source 'https://rubygems.org' do
+    gem 'rake'
+    gem 'awspec', '~>1.17.3'
+end
