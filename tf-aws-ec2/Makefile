@@ -15,7 +15,11 @@ contract:
 	conftest test -p test/contract/instances.rego $(TFPLAN).json -i hcl
 
 integration:
-	$(SETUP) terraform apply
+	#$(SETUP) terraform apply
+	$(SETUP) kitchen list
+	$(SETUP) kitchen create default-ubuntu
 
 clean:
+	$(SETUP) kitchen destroy default-ubuntu
+	$(SETUP) terraform destroy --force
 	rm $(TFPLAN) $(TFPLAN).json

@@ -1,16 +1,14 @@
-# InSpec test for recipe database_check::default
-
-# The InSpec reference, with examples and extensive documentation, can be
-# found at https://www.inspec.io/docs/reference/resources/
+db = attribute('mongodb_host', description: 'IP for database')
 
 unless os.windows?
   # This is an example test, replace with your own test.
-  describe user('root'), :skip do
+  describe user('ubuntu'), :skip do
     it { should exist }
   end
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe host(db, port: 27017, protocol: 'tcp') do
+  it { should be_reachable }
+  it { should be_resolvable }
+  its('ipaddress') { should include db }
 end
