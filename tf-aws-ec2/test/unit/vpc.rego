@@ -11,6 +11,6 @@ deny[msg] {
 }
 
 deny[msg] {
-  not contains(input["resource.aws_vpc.app_vpc"].tags, "tf-aws-ec2")
-  msg = "App VPC missing name `tf-aws-ec2`"
+  not contains(input["resource.aws_vpc.app_vpc"].tags, "Name")
+  msg = "App VPC missing tag `Name`"
 }
