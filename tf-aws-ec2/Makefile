@@ -1,3 +1,6 @@
+SETUP := aws-vault exec rosemary.training --
+TFPLAN = .tfplan
+
 unit:
 	conftest test -p test/unit/vpc.rego vpc.tf -i hcl2
 	conftest test -p test/unit/subnet.rego subnet.tf -i hcl2
@@ -5,6 +8,9 @@ unit:
 	terraform validate
 
 contract:
-	#terraform plan -out .tfplan
-	#terraform show -json .tfplan > .tfplan.json
-	conftest test -p test/contract/base.rego .tfplan.json -i hcl
+	$(SETUP) terraform plan -out $(TFPLAN)
+	terraform show -json $(TFPLAN) > $(TFPLAN).json
+	conftest test -p test/contract/base.rego $(TFPLAN).json -i hcl
+
+clean:
+	rm $(TFPLAN) $(TFPLAN).json
