@@ -19,7 +19,7 @@ resource "aws_instance" "db" {
   ami                    = data.aws_ami.ubuntu.id
   vpc_security_group_ids = [aws_security_group.db.id]
   subnet_id              = aws_subnet.private.id
-  user_data              = file("cloud-config/db-primary-init.tpl")
+  user_data              = file("templates/db-primary-init.tpl")
   tags = {
     Name  = "${var.prefix}-db"
     Owner = var.owner

@@ -8,3 +8,7 @@ provider "aws" {
   version = "~> 2.33"
 }
 
+provider "local" {
+  version = "~> 1.4"
+}
+
