@@ -9,7 +9,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name  = "public-subnet"
+    Name  = "${var.prefix}-public-subnet"
     Owner = var.owner
   }
 }
@@ -21,7 +21,7 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name  = "private-subnet"
+    Name  = "${var.prefix}-private-subnet"
     Owner = var.owner
   }
 }
