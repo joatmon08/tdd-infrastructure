@@ -9,10 +9,13 @@ unit:
 	terraform fmt
 
 contract:
-	#$(SETUP) terraform plan -out $(TFPLAN)
-	#terraform show -json $(TFPLAN) > $(TFPLAN).json
+	$(SETUP) terraform plan -out $(TFPLAN)
+	terraform show -json $(TFPLAN) > $(TFPLAN).json
 	conftest test -p test/contract/logic.rego $(TFPLAN).json -i hcl
 	conftest test -p test/contract/instances.rego $(TFPLAN).json -i hcl
+
+integration:
+	$(SETUP) terraform apply
 
 clean:
 	rm $(TFPLAN) $(TFPLAN).json

@@ -2,16 +2,15 @@ package main
 
 
 do_not_delete = [
-  "aws_instance.db",
+  "aws_instance.db"
 ]
 
 deny[msg] {
   check_delete_protected(input.resource_changes, do_not_delete)
-  warning := concat(", ", do_not_delete)
-  msg = sprintf("Terraform plan will delete resources: %v", [warning])
+  msg = "Terraform plan will delete a protected resource"
 }
 
 check_delete_protected(resources, disallowed) {
-  startswith(resources[_].address, disallowed[_])
-  resources[_].change[0].actions[_] == "destroy"
+  startswith(resources[i].address, disallowed[_])
+  resources[i].change[0].actions[_] == "delete"
 }
