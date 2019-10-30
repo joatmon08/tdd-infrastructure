@@ -1,25 +1,28 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_subnet" "public" {
-  vpc_id            = "${aws_vpc.default.id}"
-  count             = "${var.app_instances}"
-  cidr_block        = "${cidrsubnet(var.vpc_cidr, 3, count.index)}"
-  availability_zone = "${element(split(",", lookup(var.azs, var.region)), count.index)}"
+  vpc_id                  = aws_vpc.app_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 3, 0)
+  availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
 
-  tags {
-    Name = "${var.app_name}-public-${element(split(",", lookup(var.azs, var.region)), count.index)}-subnet"
-    Owner = "${var.owner}"
+  tags = {
+    Name  = "public-subnet"
+    Owner = var.owner
   }
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = "${aws_vpc.default.id}"
-  count             = "${var.app_instances}"
-  cidr_block        = "${cidrsubnet(var.vpc_cidr, 3, count.index)}"
-  availability_zone = "${element(split(",", lookup(var.azs, var.region)), count.index)}"
+  vpc_id                  = aws_vpc.app_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 3, 1)
+  availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = false
 
-  tags {
-    Name = "${var.app_name}-public-${element(split(",", lookup(var.azs, var.region)), count.index)}-subnet"
-    Owner = "${var.owner}"
+  tags = {
+    Name  = "private-subnet"
+    Owner = var.owner
   }
 }
+
