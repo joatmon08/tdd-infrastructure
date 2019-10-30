@@ -6,6 +6,7 @@ unit:
 	conftest test -p test/unit/subnet.rego subnet.tf -i hcl2
 	conftest test -p test/unit/securitygroup.rego securitygroup.tf -i hcl2
 	terraform validate
+	terraform fmt
 
 contract:
 	$(SETUP) terraform plan -out $(TFPLAN)
