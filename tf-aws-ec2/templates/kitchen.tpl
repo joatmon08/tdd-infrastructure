@@ -26,4 +26,4 @@ suites:
       inspec_tests:
         - path: test/integration/default
     inputs:
-      mongodb: ${mongodb_host_ip}
+      mongodb: "${mongodb_host_ip}"
