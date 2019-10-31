@@ -2,3 +2,7 @@
 terraform.tfstate*
 *.env
 *.tfplan*
+.kitchen.yml
+.bundle
+.kitchen
+vendor
