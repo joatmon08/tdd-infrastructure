@@ -24,6 +24,6 @@ suites:
   - name: default
     verifier:
       inspec_tests:
-        - test/integration/default
-    attributes:
-      mongodb_host: ${mongodb_host_ip}
+        - path: test/integration/default
+    inputs:
+      mongodb: ${mongodb_host_ip}
