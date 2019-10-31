@@ -8,7 +8,7 @@ driver:
   interface: dns
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
   - name: ubuntu
