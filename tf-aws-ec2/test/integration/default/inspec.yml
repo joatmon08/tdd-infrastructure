@@ -1,0 +1,11 @@
+name: default
+title: Integration Tests for Application
+maintainer: Rosemary Wang
+copyright: Rosemary Wang
+license: MPL-2.0
+summary: Demonstrates integration tests for application on AWS networking
+version: 1.0.0
+inputs:
+- name: mongodb
+  description: MongoDB Host IP Address
+  type: string
