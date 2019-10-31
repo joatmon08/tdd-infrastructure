@@ -17,7 +17,7 @@ contract:
 apply:
 	$(SETUP) terraform apply
 
-integration: apply
+integration:
 	$(SETUP) kitchen test
 
 clean-kitchen:
