@@ -21,8 +21,8 @@ integration:
 	$(SETUP) kitchen test
 
 clean-kitchen:
-	$(SETUP) kitchen destroy default-ubuntu
+	$(SETUP) kitchen destroy default-ubuntu || true
 
 clean: clean-kitchen
-	$(SETUP) terraform destroy --force
-	rm $(TFPLAN) $(TFPLAN).json
+	$(SETUP) terraform destroy --force  || true
+	rm $(TFPLAN) $(TFPLAN).json || true

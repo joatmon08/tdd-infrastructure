@@ -27,7 +27,7 @@ deny[msg] {
 }
 
 deny[msg] {
-  not contains_cidr(input.planned_values[0].root_module[0].resources, "aws_subnet.private", "10.128.0.16/28")
+  not contains_cidr(input.planned_values[0].root_module[0].resources, "aws_subnet.private", "10.128.0.32/28")
   msg = "Private subnet has wrong CIDR"
 }
 
