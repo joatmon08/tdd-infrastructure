@@ -1,6 +1,9 @@
 SETUP := aws-vault exec rosemary.training --
 TFPLAN = .tfplan
 
+install:
+	bundle install
+
 unit:
 	conftest test -p test/unit/vpc.rego vpc.tf -i hcl2
 	conftest test -p test/unit/subnet.rego subnet.tf -i hcl2
@@ -17,7 +20,7 @@ contract:
 apply:
 	$(SETUP) terraform apply
 
-integration:
+integration: apply
 	$(SETUP) kitchen test
 
 clean-kitchen:
