@@ -28,7 +28,7 @@ deny[msg] {
 
 deny[msg] {
   not contains_cidr(input.planned_values[0].root_module[0].resources, "aws_subnet.private", "10.128.0.32/28")
-  msg = "Private subnet has wrong CIDR"
+  msg = sprintf("Private subnet has wrong CIDR: %v", [block | input.planned_values[0].root_module[0].resources[i].address == "aws_subnet.private"; block := input.planned_values[0].root_module[0].resources[i].values[0].cidr_block])
 }
 
 deny[msg] {
@@ -38,12 +38,12 @@ deny[msg] {
 
 deny[msg] {
   not contains_cidr(input.planned_values[0].root_module[0].resources, "aws_subnet.public", "10.128.0.0/28")
-  msg = "Public subnet has wrong CIDR"
+  msg = sprintf("Private subnet has wrong CIDR: %v", [block | input.planned_values[0].root_module[0].resources[i].address == "aws_subnet.public"; block := input.planned_values[0].root_module[0].resources[i].values[0].cidr_block])  
 }
 
 deny[msg] {
   not contains_availability_zone(input.planned_values[0].root_module[0].resources, "aws_subnet.public", "eu-central-1")
-  msg = "PUblic subnet has wrong availability zone"
+  msg = "Public subnet has wrong availability zone"
 }
 
 
