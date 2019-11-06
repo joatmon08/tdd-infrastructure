@@ -11,13 +11,13 @@ deny[msg] {
 }
 
 deny[msg] {
-  not input["resource.aws_security_group.elb"]
-  msg = "Define elb security group"
+  not input["resource.aws_security_group.db"]
+  msg = "Define db security group"
 }
 
 deny[msg] {
-  not input["resource.aws_security_group.db"]
-  msg = "Define db security group"
+  not input["resource.aws_security_group.elb"]
+  msg = "Define elb security group"
 }
 
 deny[msg] {
@@ -28,4 +28,9 @@ deny[msg] {
 deny[msg] {
   not input["resource.aws_security_group.elb"].ingress.from_port == 80
   msg = "ELB security group should allow ingress on port 80"
+}
+
+deny[msg] {
+  not input["resource.aws_security_group.db"].ingress.from_port == 27017
+  msg = "Database security group should allow ingress on port 27017"
 }

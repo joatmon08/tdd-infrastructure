@@ -16,6 +16,17 @@ deny[msg] {
 }
 
 deny[msg] {
+  not re_match("Name.*public", input["resource.aws_subnet.public"].tags)
+  msg = "Public subnet missing tag `Name`"
+}
+
+deny[msg] {
+  not contains(input["resource.aws_subnet.public"].availability_zone, "data.aws_availability_zones.available")
+  msg = "Use data resources to interpolate availability zone"
+}
+
+
+deny[msg] {
   input["resource.aws_subnet.private"].map_public_ip_on_launch
   msg = "Private Subnet CIDR Block is not private"
 }
