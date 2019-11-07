@@ -6,6 +6,10 @@ control 'db' do
     it { should be_reachable }
     it { should be_resolvable }
   end
+
+  describe host('${db_host_ip}', port: 80, protocol: 'tcp') do
+    it { should_not be_reachable }
+  end
 end
 
 control 'outbound' do

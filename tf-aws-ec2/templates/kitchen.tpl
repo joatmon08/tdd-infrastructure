@@ -16,6 +16,8 @@ platforms:
       image_id: ${ami_id}
     transport:
       username: ubuntu
+      connection_timeout: 10
+      connection_retries: 5
 
 verifier:
   name: inspec
