@@ -13,6 +13,10 @@ Refer to the `Makefile` in each directory for how to build the tests.
 
 ## Useful References
 
+### Test-Driven Development
+
+- [Introduction to Test-Driven Development](https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92)
+
 ### Terraform Specific
 
 - Thanks to @petems for discovering these...
