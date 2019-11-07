@@ -17,6 +17,12 @@ Refer to the `Makefile` in each directory for how to build the tests.
 
 - [Introduction to Test-Driven Development](https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92)
 
+### Server Testing Tools
+- [Goss](https://github.com/aelsabbahy/goss)
+- [Inspec](https://www.inspec.io/)
+- [Test-Kitchen](https://docs.chef.io/kitchen.html)
+  - [kitchen-ec2](https://github.com/test-kitchen/kitchen-ec2)
+
 ### Terraform Specific
 
 - Thanks to @petems for discovering these...
