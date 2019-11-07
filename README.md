@@ -39,3 +39,5 @@ Use with caution. Mocks aren't always updated with latest API or configuration.
 
 - [vmware-tanzu/sonobuoy](https://github.com/vmware-tanzu/sonobuoy)
 - [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/)
+- [Helm unittest](https://github.com/lrills/helm-unittest)
+- [Helm test](https://helm.sh/docs/helm/#helm-test)
