@@ -2,7 +2,7 @@ package main
 
 contains_variables(variables) {
   variables[_].vpc_cidr[0].value = "10.128.0.0/25"
-  variables[_].region[0].value = "eu-central-1"
+  variables[_].region[0].value = "us-east-2"
   variables[_].owner[0]
 }
 
@@ -32,7 +32,7 @@ deny[msg] {
 }
 
 deny[msg] {
-  not contains_availability_zone(input.planned_values[0].root_module[0].resources, "aws_subnet.private", "eu-central-1")
+  not contains_availability_zone(input.planned_values[0].root_module[0].resources, "aws_subnet.private", "us-east-2")
   msg = "Private subnet has wrong availability zone"
 }
 
@@ -42,7 +42,7 @@ deny[msg] {
 }
 
 deny[msg] {
-  not contains_availability_zone(input.planned_values[0].root_module[0].resources, "aws_subnet.public", "eu-central-1")
+  not contains_availability_zone(input.planned_values[0].root_module[0].resources, "aws_subnet.public", "us-east-2")
   msg = "Public subnet has wrong availability zone"
 }
 
