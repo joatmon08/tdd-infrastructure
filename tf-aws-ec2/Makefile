@@ -1,4 +1,3 @@
-SETUP := aws-vault exec rosemary.training --
 TFPLAN = .tfplan
 
 install:
@@ -13,20 +12,20 @@ unit:
 	terraform fmt
 
 contract:
-	$(SETUP) terraform plan -out $(TFPLAN)
+	terraform plan -out $(TFPLAN)
 	terraform show -json $(TFPLAN) > $(TFPLAN).json
 	conftest test -p test/contract/logic.rego $(TFPLAN).json -i hcl
 	conftest test -p test/contract/instances.rego $(TFPLAN).json -i hcl
 
 apply:
-	$(SETUP) terraform apply
+	terraform apply
 
 integration: apply
-	$(SETUP) kitchen test
+	kitchen test
 
 clean-kitchen:
-	$(SETUP) kitchen destroy default-ubuntu || true
+	kitchen destroy default-ubuntu || true
 
 clean: clean-kitchen
-	$(SETUP) terraform destroy --force  || true
+	terraform destroy --force  || true
 	rm $(TFPLAN) $(TFPLAN).json || true
