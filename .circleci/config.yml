@@ -1,0 +1,106 @@
+---
+version: 2
+default_env: &default_env
+  PLAN_FILE: /root/tdd-infrastructure/tf-azure-network/.terraform/tfplan
+  GOOGLE_CREDENTIALS: /root/service-account.json
+
+defaults: &defaults
+  working_directory: /root/tdd-infrastructure/tf-azure-network
+  environment:
+    <<: *default_env
+  docker:
+    - image: joatmon08/circleci-gcp-agent:283.0-1.14.67
+
+jobs:
+
+  init:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: /root/tdd-infrastructure
+      - run:
+          name: set terraform cloud token
+          command: make terraform-cloud
+      - run:
+          name: initialize terraform
+          command: |
+            terraform init -backend-config=${TF_BACKEND}
+      - persist_to_workspace:
+          root: /root
+          paths:
+            - .terraformrc
+            - tdd-infrastructure/tf-azure-network/.terraform
+
+  unit:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: /root/tdd-infrastructure
+      - attach_workspace:
+          at: /root
+      - run:
+          name: validate terraform
+          command: terraform validate
+      - run:
+          name: run unit tests
+          command: conftest test -p test/unit/network.rego network.tf -i hcl
+      - persist_to_workspace:
+          root: /root
+          paths:
+            - .terraformrc
+            - tdd-infrastructure/tf-azure-network/.terraform
+
+  contract:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: /root/tdd-infrastructure
+      - attach_workspace:
+          at: /root
+      - run:
+          name: plan
+          command: |
+            terraform plan -out=${PLAN_FILE}
+            terraform show -json ${PLAN_FILE} > tfplan.json
+      - run:
+          name: contract test
+          command: conftest test -p test/contract ${PLAN_FILE}.json
+      - persist_to_workspace:
+          root: /root
+          paths:
+            - .terraformrc
+            - tdd-infrastructure/tf-azure-network/.terraform
+
+  apply:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: /root/tdd-infrastructure
+      - attach_workspace:
+          at: /root
+      - run:
+          name: apply
+          command: terraform apply -auto-approve ${PLAN_FILE}
+  
+  destroy:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: /root/tdd-infrastructure
+      - attach_workspace:
+          at: /root
+      - run:
+          name: destroy
+          command: terraform destroy -auto-approve
+
+workflows:
+  version: 2
+  tdd-infrastructure:
+    jobs:
+      - init:
+      - unit:
+          requires:
+            - init
+      - contract:
+          requires:
+            - unit
