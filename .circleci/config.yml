@@ -9,7 +9,7 @@ defaults: &defaults
   environment:
     <<: *default_env
   docker:
-    - image: joatmon08/circleci-gcp-agent:283.0-1.14.67
+    - image: joatmon08/circleci-tf-conftest:0.12.24-0.18.2
 
 jobs:
 
