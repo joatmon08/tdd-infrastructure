@@ -40,9 +40,9 @@ jobs:
       - run:
           name: validate terraform
           command: terraform validate
-      - run:
-          name: run unit tests
-          command: conftest test -p test/unit/network.rego network.tf -i hcl || true
+      # - run:
+      #     name: run unit tests
+      #     command: conftest test -p test/unit/network.rego network.tf -i hcl
       - persist_to_workspace:
           root: /root
           paths:
