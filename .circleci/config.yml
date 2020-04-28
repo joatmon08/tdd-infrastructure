@@ -24,7 +24,8 @@ jobs:
       - run:
           name: initialize terraform
           command: |
-            terraform init -backend-config=${TF_BACKEND}
+            echo ${TF_BACKEND} > config.hcl
+            terraform init -backend-config=config.hcl
       - persist_to_workspace:
           root: /root
           paths:
