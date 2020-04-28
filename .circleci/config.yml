@@ -63,7 +63,7 @@ jobs:
           name: contract test
           command: |
             terraform show -json ${PLAN_FILE} > tfplan.json
-            conftest test -p test/contract tfplan.json
+            conftest test -p test/contract/conftest tfplan.json
       - persist_to_workspace:
           root: /root
           paths:
