@@ -97,7 +97,7 @@ workflows:
   version: 2
   tdd-infrastructure:
     jobs:
-      - init:
+      - init
       - unit:
           requires:
             - init
