@@ -7,7 +7,7 @@ contract:
 	terraform plan -out $(TFPLAN)
 	terraform show -json $(TFPLAN) > $(TFPLAN).json
 	rm -f $(TFPLAN)
-	conftest test -p test/contract $(TFPLAN).json
+	conftest test -p test/contract/conftest $(TFPLAN).json
 
 terraform-cloud:
 ifndef TF_CLOUD_TOKEN

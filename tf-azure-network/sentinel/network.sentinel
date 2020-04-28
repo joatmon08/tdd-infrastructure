@@ -1,0 +1,30 @@
+import "tfplan/v2" as tfplan
+import "strings"
+
+environment = "staging"
+resources = values(tfplan.planned_values.resources)
+
+virtual_networks = filter resources as _, v { v.address is "azurerm_virtual_network.example" }
+subnets = filter resources as _, v { v.type is "azurerm_subnet" and v.name is "example" }
+
+virtual_networks_have_correct_address_space = rule {
+	all virtual_networks as virtual_network {
+		virtual_network.values.address_space[0] is "10.254.0.0/16"
+	}
+}
+
+two_subnets_should_exist = rule {
+	length(subnets) == 2
+}
+
+resources_have_environment_in_name = rule {
+	all resources as resource {
+		strings.has_prefix(resource.values.name, environment)
+	}
+}
+
+main = rule {
+	virtual_networks_have_correct_address_space and
+	two_subnets_should_exist and
+	resources_have_environment_in_name
+}
