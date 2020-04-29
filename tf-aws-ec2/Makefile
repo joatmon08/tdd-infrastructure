@@ -4,18 +4,18 @@ install:
 	bundle install
 
 unit:
-	conftest test -p test/unit/vpc.rego vpc.tf -i hcl2
-	conftest test -p test/unit/securitygroup.rego securitygroup.tf -i hcl2
-	conftest test -p test/unit/gateway.rego gateway.tf -i hcl2
-	conftest test -p test/unit/subnet.rego subnet.tf -i hcl2
+	conftest test -p test/unit/vpc.rego vpc.tf
+	conftest test -p test/unit/securitygroup.rego securitygroup.tf
+	conftest test -p test/unit/gateway.rego gateway.tf
+	conftest test -p test/unit/subnet.rego subnet.tf
 	terraform validate
 	terraform fmt
 
 contract:
 	terraform plan -out $(TFPLAN)
 	terraform show -json $(TFPLAN) > $(TFPLAN).json
-	conftest test -p test/contract/logic.rego $(TFPLAN).json -i hcl
-	conftest test -p test/contract/instances.rego $(TFPLAN).json -i hcl
+	conftest test -p test/contract/logic.rego $(TFPLAN).json
+	conftest test -p test/contract/instances.rego $(TFPLAN).json
 
 apply:
 	terraform apply

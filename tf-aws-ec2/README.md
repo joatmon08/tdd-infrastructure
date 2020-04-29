@@ -8,7 +8,7 @@ and database in  public and private subnet.
 ## Pre-Requisites
 * [Terraform](https://www.terraform.io/downloads.html) (v0.12.12)
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) (v2.6.5) & Bundler. Install dependencies with `make install`.
-* [conftest](https://github.com/instrumenta/conftest)
+* [conftest](https://github.com/instrumenta/conftest) (v0.18.2+)
 * AWS account with IAM & S3 access
 
 ## Testing
