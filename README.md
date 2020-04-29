@@ -6,8 +6,9 @@ Each directory has its own README and Makefile documenting
 how to run the tests and build the infrastructure associated
 with the example.
 
-- `tf-aws-ec2`: A TDD example created for 2019 O'Reilly Velocity
+- `tf-aws-ec2`: A TDD example created for [2019 O'Reilly Velocity](https://www.hashicorp.com/resources/test-driven-development-tdd-for-infrastructure)
 - `tf-aws-s3`: A TDD example created for [this blog post](https://medium.com/@joatmon08/test-driven-development-techniques-for-infrastructure-a73bd1ab273b)
+- `tf-azure-network`: A TDD example create for the [Perth Hashicorp User Group](https://www.youtube.com/watch?v=s0y0nRIrgwE)
 
 Refer to the `Makefile` in each directory for how to build the tests.
 
