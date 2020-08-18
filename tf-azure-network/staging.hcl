@@ -1,3 +1,3 @@
 hostname = "app.terraform.io"
-organization = "rosemarycorp"
-workspaces { name = "staging"}
+organization = "joatmon08"
+workspaces { name = "tdd-infrastructure-tf-azure-network"}
